@@ -1,9 +1,36 @@
-Example Elma Project
+WXR-Lite
 ===
 
-[Elma](http://klavinslab.org/elma) is an event loop manager designed to teach embedded and reactive systems programming. This repository contains an example Elma project, showing how to use many Elma features, as well as illustrating how to arrange the files and directories in an Elma project.
+[WXR-Lite](https://github.com/jmccrmck1/WXR-Lite) is an example embedded systems project that demonstrates using the event loop and process manager libray "Elma" on a Raspberry Pi to pull weather data from a website to manipulate LEDs.
 
-The source code for this project is available [on github](https://github.com/klavinslab/elma_project).
+The source code for this project is available [on github](https://github.com/jmccrmck1/WXR-Lite).
+
+Project Goals
+===
+
+What will I do?
+The objective of this project is to use Elma on a raspberry pi along with http.h and json.h to obtain local Seattle weather and then create a visual response that correlates to the data being received.  I am leaning on using wind speed and direction to control LED intensity and color spectrum.  The idea being the creation of an informative visual que of local wind conditions.
+
+What will it mean for me to succeed?
+Not having used a raspberry pi before sucess will be getting any portion of this functionality to work.  That being said I really want to be able to succeed at obtaining online data and responding to it in some meaningful fashion using the Elma library.
+
+What resources will I use?
+As mentioned previously this project will use a raspberry pi along with LED sensors of some kind.  An online weather data source such as NOAA, Google, etc. will also be used.
+
+Milestones
+===
+
+1. Get Docker, Doxygen, Google Test, Visual Studio Code and Elma working on Raspberry Pi - 3/17/19
+2. Include http.h and json.h library - 3/17/19
+3. Get weather related data from on-line source - 3/19/19
+4. Develop process that responsds to weather data - 3/21/19
+5. Completing API documentation for project - 3/22/19
+
+Accomplishments to Date:
+===
+
+Installed Raspian, Docker and Visual Studio on Raspberry Pi.
+Confirmed Doxygen, Google Test, and Elma work on Raspberry Pi via Docker.
 
 Installation
 ---
