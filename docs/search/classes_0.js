@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['offstate',['OffState',['../classstopwatch_1_1OffState.html',1,'stopwatch']]],
-  ['onstate',['OnState',['../classstopwatch_1_1OnState.html',1,'stopwatch']]]
+  ['channel',['Channel',['../classelma_1_1Channel.html',1,'elma']]],
+  ['client',['Client',['../classelma_1_1Client.html',1,'elma']]]
 ];
