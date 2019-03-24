@@ -100,6 +100,7 @@ Given time and the simplicity of elma structure, Google Tests were not written. 
 Below is an example json return of the Current Weather API from openweathermap.org:
 
 '''json
+
 {
     "base": "stations",
     "clouds": {
@@ -142,6 +143,7 @@ Below is an example json return of the Current Weather API from openweathermap.o
         "speed": 3.36
     }
 }
+
 '''
 
 The output of the project is the wind speed and wind direction sent to the terminal and the corresponding number of LEDs lit with the appropriate color on the RPi LED display.
