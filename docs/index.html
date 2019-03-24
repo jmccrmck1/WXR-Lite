@@ -119,13 +119,51 @@ NW - White
 </pre><p>More elaborate LED matrix displays were desired for the project to better display the data but in the end a very simple and easy to install option with the Pimoroni Blitz! was used. The desire was also to the use the NOAA Weather API but the call method was a little more complex and the json type was a little different. With added time it could have been used but wasn't to save time. Instead a simpler API call with openweathermap.org was used instead.</p>
 <h2>Results </h2>
 <p>Given time and the simplicity of elma structure, Google Tests were not written. Testing was accomplished using cout statements to verify json data was recieved and wind data was extracted and converted to numbers and cenverted again to the correct units before sending to the LED method.</p>
-<p>Below is an example json return of the Current Weather API from openweathermap.org: '''json { "base": "stations", "clouds": { "all": 40 }, "cod": 200, "coord": { "lat": 47.61, "lon": -122.33 }, "dt": 1553403523, "id": 5809844, "main": { "humidity": 62, "pressure": 1022, "temp": 48.63, "temp_max": 52, "temp_min": 45 }, "name": "Seattle", "sys": { "country": "US", "id": 5798, "message": 0.0092, "sunrise": 1553349980, "sunset": 1553394323, "type": 1 }, "visibility": 16093, "weather": [ { "description": "scattered clouds", "icon": "03n", "id": 802, "main": "Clouds" } ], "wind": { "deg": 350, "speed": 3.36 } } '''</p>
-<p>The output of the project is the wind speed and wind direction sent to the terminal and the corresponding number of LEDs lit with the appropriate color on the RPi LED display.</p>
+<p>Below is an example json return of the Current Weather API from openweathermap.org: </p><pre class="fragment">{
+"base": "stations",
+    "clouds": {
+        "all": 40
+    },
+    "cod": 200,
+    "coord": {
+        "lat": 47.61,
+        "lon": -122.33
+    },
+    "dt": 1553403523,
+    "id": 5809844,
+    "main": {
+        "humidity": 62,
+        "pressure": 1022,
+        "temp": 48.63,
+        "temp_max": 52,
+        "temp_min": 45
+    },
+    "name": "Seattle",
+    "sys": {
+        "country": "US",
+        "id": 5798,
+        "message": 0.0092,
+        "sunrise": 1553349980,
+        "sunset": 1553394323,
+        "type": 1
+    },
+    "visibility": 16093,
+    "weather": [
+        {
+            "description": "scattered clouds",
+            "icon": "03n",
+            "id": 802,
+            "main": "Clouds"
+        }
+    ],
+    "wind": {
+        "deg": 350,
+        "speed": 3.36
+    }
+}
+</pre><p>The output of the project is the wind speed and wind direction sent to the terminal and the corresponding number of LEDs lit with the appropriate color on the RPi LED display.</p>
 <div class="image">
-<img src="images/RPI_Demo.jpg" alt="picture title"/>
-</div>
-<div class="image">
-<img src="images/Term_Demo.jpg" alt="picture title"/>
+<img src="images/RPi_Demo.jpg" alt="picture title"/>
 </div>
 <div class="image">
 <img src="images/Term_Demo2.jpg" alt="picture title"/>
@@ -171,7 +209,7 @@ NW - White
 <!-- start footer part -->
   <hr class="footer"/><address class="footer"><small>
   Developed by Joshua McCormick</a> for UW ECE 590<br>
-  Generated on Sat Mar 23 2019 22:16:34 for WXR-Lite by &#160;<a href="http://www.doxygen.org/index.html">
+  Generated on Sat Mar 23 2019 22:56:45 for WXR-Lite by &#160;<a href="http://www.doxygen.org/index.html">
   Doxygen
   </a> 1.8.13
   </small></address>

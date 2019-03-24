@@ -1,7 +1,9 @@
-build/
+doxygen_sqlite3.db
 bin/
-project/bin/
-project/build/
+test/bin
+test/build
+examples/bin
+build/
 tmp/
 ~*
 *.a
