@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Elma: Elma</title>
+<title>WXR-Lite: WXR-Lite</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,9 +22,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Elma
+   <div id="projectname">WXR-Lite
    </div>
-   <div id="projectbrief">An event loop manager for embedded systems</div>
+   <div id="projectbrief">An event loop manager example project for Raspberry Pi</div>
   </td>
  </tr>
  </tbody>
@@ -60,38 +60,11 @@ $(function() {
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Elma </div>  </div>
+<div class="title">WXR-Lite </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Elma is an event loop and process manager for embedded and reactive systems. Elma is structured as a C++ library of classes on top of which you build your own C++ project. It keeps track of processes, finite state machines, events, and communication channels, executing them at specified frequencies. Elma was developed as part of the University of Washington's <a href="https://github.com/klavins/ECEP520">ECE P 520 course</a> on advanced embedded systems programming. More information on how Elma was designed can be found in the links below:</p><ul>
-<li><a href="https://github.com/klavins/ECEP520/tree/master/week_6">Event loop management</a></li>
-<li><a href="https://github.com/klavins/ECEP520/tree/master/week_7">Events and finite state machines</a></li>
-<li><a href="https://github.com/klavins/ECEP520/blob/master/week_8">HTTP in event loops</a></li>
-</ul>
-<h1>Installation </h1>
-<p>The source code for Elma <a href="https://github.com/klavinslab/elma">is on Github</a>.</p>
-<h2>From Dockerhub </h2>
-<p>To get started, you will need a C++ build environment. We have provided one with the Docker container <code>elma</code>, which you can use as follows: </p><pre class="fragment">git clone https://github.com/klavinslab/elma.git
-cd elma
-docker run -v $PWD:/source -it klavins/elma:latest bash
-make
-examples/bin/basic
-</pre><h2>From the Dockerfile </h2>
-<p>You can also build the docker environment, described in env/Dockerfile, yourself, with the following commands: </p><pre class="fragment">git clone https://github.com/klavinslab/elma.git
-cd elma
-docker build -t myelma .
-docker run -v $PWD:/source -it myelma bash
-make
-examples/bin/basic
-</pre><h2>Manual Installation </h2>
-<p>To install Elma without using Docker, you will need to install the following tools:</p><ul>
-<li><a href="https://gcc.gnu.org/">gcc</a> 4.9 or an equivalent C/C++ compiler that supports at least C++14</li>
-<li>Make (if you want to use the makefile. Alternatively, you can use some other build manager)</li>
-<li><a href="http://www.doxygen.nl/">Doxygen</a></li>
-<li><a href="https://github.com/google/googletest">Google Test</a></li>
-<li>Neils Lohmann's JSON library: <a href="https://github.com/nlohmann/json">https://github.com/nlohmann/json</a></li>
-<li><a href="https://github.com/klavins/cpp-httplib.git">My fork</a> of <a href="https://github.com/yhirose">yhirose</a>'s HTTP library</li>
-</ul>
+<div class="textblock"><p><a href="https://github.com/jmccrmck1/WXR-Lite">WXR-Lite</a> is an example embedded systems project that demonstrates using the event loop and process manager libray "Elma" on a Raspberry Pi to pull weather data from a website to manipulate LEDs.</p>
+<p>The source code for this project is available <a href="https://github.com/jmccrmck1/WXR-Lite">on github</a>.</p>
 <h2>Installation on Unix systems (e.g. Raspbian) </h2>
 <p>First install required packages available through apt-get </p><pre class="fragment">sudo apt-get update
 sudo apt-get install -y cmake
@@ -100,7 +73,7 @@ sudo apt-get install -y graphviz
 sudo apt-get install -y doxygen
 sudo apt-get install -y cmake
 sudo apt-get install -y libssl-dev
-</pre><p>Next, install Google Test </p><pre class="fragment">cd /usr/src
+</pre><p>Next, install Google Test (Optional) </p><pre class="fragment">cd /usr/src
 sudo git clone https://github.com/google/googletest.git
 cd googletest
 sudo mkdir install
@@ -112,28 +85,93 @@ sudo make install
 cd /usr/local/include/json
 sudo curl -O -J -L https://github.com/nlohmann/json/releases/download/v3.5.0/json.hpp
 sudo mv json.hpp json.h
-</pre><p>Next, install httplib </p><pre class="fragment">cd /tmp
+</pre><p>Next, install httplib library </p><pre class="fragment">cd /tmp
 git clone https://github.com/klavins/cpp-httplib.git
 sudo mkdir /usr/local/include/httplib
 sudo mv /tmp/cpp-httplib/httplib.h /usr/local/include/httplib
-</pre><p>Now you should be ready to install elma: </p><pre class="fragment">cd ~
-mkdir Code
-cd Code
-git clone https://github.com/klavinslab/elma.git
-cd elma
+</pre><p>Next, install bcm2835 library</p>
+<p>download bcm2835-1.xx.tar.gz from: <a href="www.airspayce.com/mikem/bcm2835/">www.airspayce.com/mikem/bcm2835/</a> </p><pre class="fragment">cd ~
+tar zxvf bcm2835-1.xx.tar.gz
+cd bcm2835-1.xx.tar.gz
+./configure
 make
-</pre><p>Note that the Makefile should detect if you are on a pi by using the command </p><pre class="fragment">uname -m
-</pre><p>which on a pi 3 model B+ returns 'armv71'. If your pi is different, you might need to change the ifeq statments in <code>test/Makefile</code> and <code>examples/Makefile</code>.</p>
-<p>If you would like to treat elma as a library, so you can link in other code, you should link to the relevant files in to the unversal system resources (usr) as follows: </p><div class="fragment"><div class="line">ln -s include /usr/local/include/elma</div><div class="line">ln -s lib/libelma.a /usr/local/lib/libelma.a</div></div><!-- fragment --><p> Then you can do </p><div class="fragment"><div class="line">{c++}</div><div class="line">#include &quot;elma/elma.h&quot;</div></div><!-- fragment --><p> in your code and use the <code>-lelma</code> flag while linking. See the <a href="https://github.com/klavinslab/elma_project">example elma project</a> for an example.</p>
-<h1>Usage </h1>
-<p>See the examples in the <code>examples</code> directory for how to build new event loops with Elma.</p>
-<h1>License </h1>
-<p>This software is open source and uses the MIT license. Details can be found <a href="https://github.com/klavinslab/elma">here</a>. </p>
+sudo make check
+sudo make install
+</pre><p>Now you should be ready to install WXR-Lite! (few!) </p><pre class="fragment">cd ~
+git clone https://github.com/jmccrmck1/WXR-Lite.git
+cd WXR-Lite
+make
+make docs
+</pre><h2>Execution </h2>
+<p>To run the WXR-Lite, type </p><pre class="fragment">./project/bin/wxrlite
+</pre><h2>Architecture </h2>
+<p>This project was designed with simplicity in mind given the timeframe and the unfamiliarity with using a Raspberry Pi, requesting data from a server, using Doxygen to generate project documentation and posting of the project to DockerHub.</p>
+<p>This project used a Raspberry Pi 3B with Raspian Jamie installed along with a 1x8 RGB LED display that mounts directly on the GPIO port. Although Docker was installed on the RPi, I did not use that method to run the code and interface with the RPi GPIO port. Instead I manually installed elma from <a href="https://github.com/klavinslab/elma">GitHub</a> following the Manual Installation instructions in that README file. With Make, Doxygen, Google Test, http library, json library and elma installed, the next step was installing the necessary libraries to control the LEDs, namely bcm2835 and clinkt (not strickly a library, files are included in this repo).</p>
+<p>A process for obtaining weather data from a server and sending select values to the RPi LEDs was created (<a class="el" href="classGetWXRdata.html">GetWXRdata</a>). Within this process a server client is created for getting/calling a weather API for realtime weather data for Seattle, WA. From that data wind speed and wind direction are extracted and sent to a method that manipulates the LEDs to reflect their values. The update rate of the weather data is not quick, perhpas on the order of 10 minutes. Given that, the elma manager is scheduled to run the process every 5 minutes and a total run time of 60 minutes unless stopped by the user.</p>
+<p>The number of knots per LED lit can be changed as desired but is set in this example at 2 knots/LED for a total of 16 knots max. The wind direction can fall in 1 of 8 45 deg compass heading segments centered on N, NE, E, SE, S, SW, W and NW with each having the following assigned colors: </p><pre class="fragment">N  - Gray
+NE - Blue
+E  - Lime
+SE - Cyan
+S  - Red
+SW - Magenta
+W  - Yellow
+NW - White
+</pre><p>More elaborate LED matrix displays were desired for the project to better display the data but in the end a very simple and easy to install option with the Pimoroni Blitz! was used. The desire was also to the use the NOAA Weather API but the call method was a little more complex and the json type was a little different. With added time it could have been used but wasn't to save time. Instead a simpler API call with openweathermap.org was used instead.</p>
+<h2>Results </h2>
+<p>Given time and the simplicity of elma structure, Google Tests were not written. Testing was accomplished using cout statements to verify json data was recieved and wind data was extracted and converted to numbers and cenverted again to the correct units before sending to the LED method.</p>
+<p>Below is an example json return of the Current Weather API from openweathermap.org: '''json { "base": "stations", "clouds": { "all": 40 }, "cod": 200, "coord": { "lat": 47.61, "lon": -122.33 }, "dt": 1553403523, "id": 5809844, "main": { "humidity": 62, "pressure": 1022, "temp": 48.63, "temp_max": 52, "temp_min": 45 }, "name": "Seattle", "sys": { "country": "US", "id": 5798, "message": 0.0092, "sunrise": 1553349980, "sunset": 1553394323, "type": 1 }, "visibility": 16093, "weather": [ { "description": "scattered clouds", "icon": "03n", "id": 802, "main": "Clouds" } ], "wind": { "deg": 350, "speed": 3.36 } } '''</p>
+<p>The output of the project is the wind speed and wind direction sent to the terminal and the corresponding number of LEDs lit with the appropriate color on the RPi LED display.</p>
+<div class="image">
+<img src="images/RPI_Demo.jpg" alt="picture title"/>
+</div>
+<div class="image">
+<img src="images/Term_Demo.jpg" alt="picture title"/>
+</div>
+<div class="image">
+<img src="images/Term_Demo2.jpg" alt="picture title"/>
+</div>
+<h2>Acknowledgements </h2>
+<p>Pirouz Naghavi:</p><ul>
+<li>a great sounding board for my ideas</li>
+<li>helped answer git related questions</li>
+<li>helped answer project file structure related questions</li>
+<li>helped give ideas for some of my compiling errors</li>
+<li>colaborated on figuring out some of the doxygen html details</li>
+<li>colaborated on ordering Blinkt! LED effector and jumper wires</li>
+<li>colaborated on finding and using the Weather API</li>
+<li>colaborated on getting RPi up and running</li>
+</ul>
+<h2>References </h2>
+<p>WEBSITES:</p>
+<p>Raspberry Pi Related:</p>
+<p><a href="https://www.adafruit.com">www.adafruit.com</a> - Great resource for sensors and effectors and other RPi supplies. Also has a <a href="https://learn.adafruit.com/adafruits-raspberry-pi-lesson-6-using-ssh/overview">tutorial</a> for setting up SSH.</p>
+<p><a href="https://www.raspberrypi.org/documentation/remote-access/">www.raspberrypi.org/documentation/remote-access/</a> - Resource for helping to find IP address of RPi and also for remote-access methods such as SSH.</p>
+<p><a href="https://raspberrypi.stackexchange.com/questions/42929/how-to-safely-switch-off-the-raspberry-pi/42945">raspberrypi.stackexchange.com</a> - Answers for how to properly shutdown your RPi.</p>
+<p><a href="https://shop.pimoroni.com/products/blinkt">shop.pimoroni.com/products/blinkt</a> - The LED effector used with RPi for this project, an eight RGB LED indicator, cheap @ $6/ea at <a href="www.adafruit.com/?=Blinkt!">adafruit.com</a>, and simple to install.</p>
+<p><a href="https://medium.freecodecamp.org/the-easy-way-to-set-up-docker-on-a-rspberry-pi-7d24ced073ef">medium.freecodecamp.org</a> - Great reference on how to easily setup docker on a RPi.</p>
+<p><a href="https://pimylifeup.com/raspberry-pi-visual-studio-code/">pimylifeup.com/raspberry-pi-visual-studio-code/</a> - Great guide. Raspberry Pi Visual Studio Code: Installing VS Code on Raspbian, By Gus, Sep 19 2018, updated Feb 17, 2019.</p>
+<p><a href="https://stackoverflow.com/questions/30059784/docker-access-to-raspberry-pi-gpio-pins">stackoverflow.com/questions/30059784/docker-access-to-raspberry-pi-gpio-pins</a> - Great resource on how to access RPi GPIO pins when using Docker. I did not do this but if I had time I would have.</p>
+<p>Implementation:</p>
+<p><a href="https://www.rapidtables.com/web/color/RGB.html">www.rapidtables.com/web/color/RGB_Color.html</a> - Excellent reference for RGB Color Codes. Really helped in choosing colors for compass heading correlation.</p>
+<p><a href="https://www.elecfreaks.com/learn-en/starter_kit_case_13">www.elecfreaks.com</a> - Example project that gave ideas of how I could implent my compass heading color correlation.</p>
+<p><a href="https://www.calculateme.com/speed/miles-per-hour/to-knots">www.calculateme.com</a> - Provided quick factor to apply to convert from mph to knots.</p>
+<p>Weather APIs:</p>
+<p><a href="https://openweathermap.org/api">openweathermap.org/api</a> - The Weather API used for this project. Requires you make a free account which gives you access to Current weather data API among a few other weather APIs. Your account comes with an API key that is required when making API calls. <em><b>[FOR THIS CODE TO WORK, YOU WILL HAVE TO OBTAIN YOUR OWN API KEY TO APPEND TO THE END OF YOUR API CALLS]</b></em> (mine has not been provided ;) )</p>
+<p><a href="https://www.programmableweb.com/news/top-10-weather-apis/analysis/2014/11/13">www.programmableweb.com</a> - Top 10 Weather APIs, By Janet Wagner. Provided weather API options for project.</p>
+<p><a href="https://www.weather.gov/documenttation/services-web-api#/default/get stations%20 stationld%20 observations latest">www.weather.gov</a> - NOAA's API Web Service, the runner up to the API used for this project.</p>
+<p>LIBRARIES:</p>
+<p>clinkt - Github:</p>
+<p><a href="https://github.com/DianaProbst/clinkt">github.com/DianaProbst/clinkt</a> - DianaProbst's clinkt repository provided a C++ ported version of the Python Library blinkt for the Pimoroni Blinkt LED display (and related APA102 pixel strips) on the Raspberry Pi. This library was instrumental for getting LED functionality on the Raspberry Pi using C++.</p>
+<p>bcm2835 - Other:</p>
+<p><a href="www.airspayce.com/mikem/bcm2835">www.airspayece.com/mikem/bcm2835/</a> - C library for Boadcom BCM 2835 as used in Raspberry Pi. This is a required library when using the clinkt library, per the clinkt <a class="el" href="README_8md_source.html">README.md</a> file. Library is analagous to <a href="wiringpi.com">WiringPi</a>.</p>
+<p><a href="https://raspberry-projects.com/pi/programming-in-c/io-pins/bcm2835-by-mike-mccauley">raspberry-projects.com/pi/programming-in-c/io-pins/bcm2835-by-mike-mccauley</a> - Resource on how to install the library correctly. Helped when troubleshooting library linker errors.</p>
+<p><a href="https://stackoverflow.com/questions/4130681/undefined-reference-maybe-makefile-is-wrong">stackoverflow.com</a> - Helped me recognize why I was getting undefined reference errors.</p>
+<p>"# WXR-Lite" </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
   <hr class="footer"/><address class="footer"><small>
-  Developed by <a href="http://klavinslab.org">Eric Klavins</a> for UW ECE P 520<br>
-  Generated on Sat Mar 23 2019 01:31:16 for Elma by &#160;<a href="http://www.doxygen.org/index.html">
+  Developed by Joshua McCormick</a> for UW ECE 590<br>
+  Generated on Sat Mar 23 2019 22:16:34 for WXR-Lite by &#160;<a href="http://www.doxygen.org/index.html">
   Doxygen
   </a> 1.8.13
   </small></address>

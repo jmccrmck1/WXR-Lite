@@ -7,6 +7,5 @@ var searchData=
   ['entry',['entry',['../classelma_1_1State.html#a6915b655c0975dd488e4e32a4ab62a03',1,'elma::State']]],
   ['event',['Event',['../classelma_1_1Event.html',1,'elma::Event'],['../classelma_1_1Event.html#a2b1b7657420bbbebb81f1c59cc8fda96',1,'elma::Event::Event()']]],
   ['exception',['Exception',['../classelma_1_1Exception.html',1,'elma']]],
-  ['exit',['exit',['../classelma_1_1State.html#ad0dcc51dbc4dfdfd0704a939389d289d',1,'elma::State']]],
-  ['elma',['Elma',['../index.html',1,'']]]
+  ['exit',['exit',['../classelma_1_1State.html#ad0dcc51dbc4dfdfd0704a939389d289d',1,'elma::State']]]
 ];

@@ -11,12 +11,16 @@
 #include <math.h>     // round
 
 
+//! (Not Used) 
 void GetWXRdata::init() {}
 
+//! Requests real-time Seattle weather data from openweathermap.org,
+//! stores that data in a json object and pulls wind speed and wind
+//! direction from it and sends those values to the ledwind() method.
 void GetWXRdata::start() {
     
     Client c;
-
+        //      Server URL                            ID for Seattle  Imperial = non-metric units   Appid = API Key (this key will not work, you need your own!)
         c.get("https://api.openweathermap.org/data/2.5/weather?id=5809844&units=imperial&appid=dfd263074cf6ada7f07b057a79b24853", [this](json& response){
             //std::cout<<response.dump(4)<<std::endl;
             _data = response;
@@ -24,22 +28,25 @@ void GetWXRdata::start() {
         std::this_thread::sleep_for(std::chrono::seconds(1));
         c.process_responses();
 
-        //std::cout<<_data.dump(4)<<std::endl;
-        _wspeed = _data["wind"]["speed"]; //Imperial = miles/hour (mph)
-        std::cout << "Wind Speed: " << _wspeed << " mph" << std::endl;
-        _wspeed /= 1.151; // converts mph to knots
-        std::cout << "Wind Speed: " << _wspeed << " knots" << std::endl;
-        _wspeed = round(_wspeed);
-        _wdeg = _data["wind"]["deg"]; // degrees (deg)
+        //std::cout<<_data.dump(4)<<std::endl;                              // displays recieved json data
+        _wspeed = _data["wind"]["speed"];                                   //Imperial = miles/hour (mph)
+        //std::cout << "Wind Speed: " << _wspeed << " mph" << std::endl;    // check string to double
+        _wspeed /= 1.151;                                                   // converts mph to knots
+        //std::cout << "Wind Speed: " << _wspeed << " knots" << std::endl;  // check conversion
+        _wspeed = round(_wspeed);                                           // rounds to the nearest knot
+        _wdeg = _data["wind"]["deg"];                                       // degrees (deg)
         std::cout << "Wind Speed: " << _wspeed << " knots" << std::endl;
         std::cout << "Wind Direction: " << _wdeg << " deg" << std::endl << std::endl;
     
     GetWXRdata::ledwind(_wspeed, _wdeg);
 }
 
+//! Requests real-time Seattle weather data from openweathermap.org,
+//! stores that data in a json object and pulls wind speed and wind
+//! direction from it and sends those values to the ledwind() method.
 void GetWXRdata::update() {
     Client c;
-
+        //      Server URL                            ID for Seattle  Imperial = non-metric units   Appid = API Key (this key will not work, you need your own!)
         c.get("https://api.openweathermap.org/data/2.5/weather?id=5809844&units=imperial&appid=dfd263074cf6ada7f07b057a79b24853", [this](json& response){
             //std::cout<<response.dump(4)<<std::endl;
             _data = response;
@@ -49,9 +56,9 @@ void GetWXRdata::update() {
         
         //std::cout<<_data.dump(4)<<std::endl;
         _wspeed = _data["wind"]["speed"]; //Imperial = miles/hour (mph)
-        std::cout << "Wind Speed: " << _wspeed << " mph" << std::endl;
+        //std::cout << "Wind Speed: " << _wspeed << " mph" << std::endl;
         _wspeed /= 1.151; // converts mph to knots
-        std::cout << "Wind Speed: " << _wspeed << " knots" << std::endl;
+        //std::cout << "Wind Speed: " << _wspeed << " knots" << std::endl;
         _wspeed = round(_wspeed); // rounding
         _wdeg = _data["wind"]["deg"]; // degrees (deg)
         std::cout << "Wind Speed: " << _wspeed << " knots" << std::endl;
@@ -60,13 +67,20 @@ void GetWXRdata::update() {
         GetWXRdata::ledwind(_wspeed, _wdeg);
 }
 
+//! Turns off the LEDs on the RPi and nicely stops the gpio bus.
 void GetWXRdata::stop() {
     int dummy = 0;
     dieNicely(dummy); // darkens pixels and stops gpio nicely
 }
 
+//! Sends wind information to RPi for LED display.
+    /*! 
+      \param windspeed The wind speed in knots
+      \param winddeg The wind direction in degrees
+      \return int 0 = normal op, int 1 = unsuccessful op
+    */
 int GetWXRdata::ledwind(double windspeed, double winddeg) {
-    int kpp = 3;    // knots per pixel
+    int kpp = 2;    // knots per pixel
 
     if (clinkt_start()){
         std::cout << "Unable to start apa102: bcm not initialising?\n";

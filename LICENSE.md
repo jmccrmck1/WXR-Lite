@@ -1,4 +1,4 @@
-Elma: The Event Loop Manager
+WXR-Lite: An Event Loop Manager Example Project for Raspberry Pi
 ===
 
 Copyright 2019 University of Washington
