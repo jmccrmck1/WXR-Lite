@@ -9,7 +9,9 @@
 
 using namespace elma;
 
-//! A process that obtains json weather data using an HTTP client, 
+//! Uses HTTP client to obtain wind data that will set RPi LEDs.
+
+//! A process that obtains json weather data using an HTTP client
 //! extracts wind data values and sends to RPi LED output.
 class GetWXRdata : public Process {
 

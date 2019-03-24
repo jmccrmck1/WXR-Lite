@@ -107,7 +107,7 @@ make docs
 </pre><h2>Architecture </h2>
 <p>This project was designed with simplicity in mind given the timeframe and the unfamiliarity with using a Raspberry Pi, requesting data from a server, using Doxygen to generate project documentation and posting of the project to DockerHub.</p>
 <p>This project used a Raspberry Pi 3B with Raspian Jamie installed along with a 1x8 RGB LED display that mounts directly on the GPIO port. Although Docker was installed on the RPi, I did not use that method to run the code and interface with the RPi GPIO port. Instead I manually installed elma from <a href="https://github.com/klavinslab/elma">GitHub</a> following the Manual Installation instructions in that README file. With Make, Doxygen, Google Test, http library, json library and elma installed, the next step was installing the necessary libraries to control the LEDs, namely bcm2835 and clinkt (not strickly a library, files are included in this repo).</p>
-<p>A process for obtaining weather data from a server and sending select values to the RPi LEDs was created (<a class="el" href="classGetWXRdata.html">GetWXRdata</a>). Within this process a server client is created for getting/calling a weather API for realtime weather data for Seattle, WA. From that data wind speed and wind direction are extracted and sent to a method that manipulates the LEDs to reflect their values. The update rate of the weather data is not quick, perhpas on the order of 10 minutes. Given that, the elma manager is scheduled to run the process every 5 minutes and a total run time of 60 minutes unless stopped by the user.</p>
+<p>A process for obtaining weather data from a server and sending select values to the RPi LEDs was created (<a class="el" href="classGetWXRdata.html" title="Uses HTTP client to obtain wind data that will set RPi LEDs. ">GetWXRdata</a>). Within this process a server client is created for getting/calling a weather API for realtime weather data for Seattle, WA. From that data wind speed and wind direction are extracted and sent to a method that manipulates the LEDs to reflect their values. The update rate of the weather data is not quick, perhpas on the order of 10 minutes. Given that, the elma manager is scheduled to run the process every 5 minutes and a total run time of 60 minutes unless stopped by the user.</p>
 <p>The number of knots per LED lit can be changed as desired but is set in this example at 2 knots/LED for a total of 16 knots max. The wind direction can fall in 1 of 8 45 deg compass heading segments centered on N, NE, E, SE, S, SW, W and NW with each having the following assigned colors: </p><pre class="fragment">N  - Gray
 NE - Blue
 E  - Lime
@@ -209,7 +209,7 @@ NW - White
 <!-- start footer part -->
   <hr class="footer"/><address class="footer"><small>
   Developed by Joshua McCormick</a> for UW ECE 590<br>
-  Generated on Sat Mar 23 2019 22:56:45 for WXR-Lite by &#160;<a href="http://www.doxygen.org/index.html">
+  Generated on Sat Mar 23 2019 23:58:23 for WXR-Lite by &#160;<a href="http://www.doxygen.org/index.html">
   Doxygen
   </a> 1.8.13
   </small></address>

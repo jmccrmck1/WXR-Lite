@@ -1,5 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="node1" href="$classelma_1_1Process.html" title="An abstract base class for processes. " alt="" coords="5,31,117,57"/>
 <area shape="rect" id="node2" href="$classelma_1_1StateMachine.html" title="A finite state machine class. " alt="" coords="165,5,316,32"/>
-<area shape="rect" id="node3" href="$classGetWXRdata.html" title="GetWXRdata" alt="" coords="190,56,291,83"/>
+<area shape="rect" id="node3" href="$classGetWXRdata.html" title="Uses HTTP client to obtain wind data that will set RPi LEDs. " alt="" coords="190,56,291,83"/>
 </map>
